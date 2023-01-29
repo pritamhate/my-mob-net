@@ -84,6 +84,7 @@ body {
   min-height: 250px;
   max-height: 250px;
   object-fit: scale-down;
+  border: 1px solid;
 }
 
 hr {
