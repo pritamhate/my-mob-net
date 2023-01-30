@@ -1,5 +1,6 @@
 const mCards = document.getElementById('mobileCards');
 const cartList = document.getElementById('cartItem');
+const totalAmt = document.getElementById('totalAmount');
 async function prit() {
     console.log("indide the prit");
 
@@ -46,6 +47,8 @@ let cartCount = document.getElementById('cartCount');
 cartCount.innerText = countOfCart;
 let cartItems = [];
 
+let ta = 0;
+
 //add items to cart
 function addtocart(e) {
     let parentNode = e.parentNode.parentNode.parentNode;
@@ -66,7 +69,11 @@ function addtocart(e) {
 
     for (item of cartItems) {
         cartItems = [];
-        console.log(item.pprice);
+
+        //total amount
+        ta = ta + item.pprice;
+
+        totalAmt.innerText = ta;
 
         cartList.innerHTML+= `
             <li class="list-group-item">
@@ -77,3 +84,5 @@ function addtocart(e) {
         `;
     }
 }
+
+//remove item from cart
