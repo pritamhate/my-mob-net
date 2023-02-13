@@ -99,6 +99,7 @@ function addtocart(e) {
 function calculateEmi(a) {
     let emiParentNode = a.parentNode.parentNode.parentNode;
     let emiChildNodes = emiParentNode.childNodes;
+    const emiPanelTitle = document.getElementById("emiPanelLabel");
 
     
 
@@ -107,6 +108,8 @@ function calculateEmi(a) {
     let epp = Number(emiProductPrice.replace("$",""));
 
     console.log(emiProductName, epp);
+
+    emiPanelTitle.innerHTML = `Calculate Emi for: ${emiProductName}`;
 
     totalAmountForEmi.value = epp;
 }
@@ -118,9 +121,41 @@ function computeLoan() {
     const months = document.querySelector("#months").value;
     const interest = (amount * (interest_rate * 0.01)) / months;
     const totalWithInterest = (Number(amount) + Number(interest));
+    const emiResult = document.querySelector("#emiChart");
     let payment = (amount / months + interest).toFixed(2);
     payment = payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    document.querySelector(
-      "#payment"
-    ).innerHTML = `Monthly Payment = $${Math.round(payment)} with the interest rate of ${interest_rate} the additinal amount to be paid is $${Math.round(interest)} & the total amount is ${Math.round(totalWithInterest)}`;
-  }
+    //document.querySelector("#payment").innerHTML = `Monthly Payment = $${Math.round(payment)} with the interest rate of ${interest_rate} the additinal amount to be paid is $${Math.round(interest)} & the total amount is $${Math.round(totalWithInterest)}`;
+
+    emiResult.innerHTML = `
+    <tr>
+        <th scope="row">Amount</th>
+        <td>$${amount}</td>
+    </tr>
+    <tr>
+        <th scope="row">Interest Rate</th>
+        <td>${interest_rate}</td>
+    </tr>
+    <tr>
+        <th scope="row">Total Interest</th>
+        <td>$${Math.round(interest)}</td>
+    </tr>
+    <tr>
+        <th scope="row">Total Interest + Amount</th>
+        <td>$${Math.round(totalWithInterest)}</td>
+    </tr>
+    <tr>
+        <th scope="row">EMI for ${months} Months</th>
+        <td>$${Math.round(payment)}</td>
+    </tr>
+    `;
+}
+
+const myOffcanvas = document.getElementById('emiPanel')
+myOffcanvas.addEventListener('hidden.bs.offcanvas', event => {
+    const emiResult = document.querySelector("#emiChart");
+    emiResult.innerHTML = `
+    <tr>
+        <td scope="row" class="text-center text-bold">Calculate To See The Result</td>
+    </tr>
+    `;
+});

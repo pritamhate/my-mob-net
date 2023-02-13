@@ -11286,3 +11286,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.offcanvas-bottom {
+  height: 40vh;
+}

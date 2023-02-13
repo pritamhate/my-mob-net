@@ -109,20 +109,37 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
-            <h2 id="payment"></h2>
-            <div class="input">
+            <!-- <h2 id="payment"></h2> -->
 
-                <p>Loan Amount: $</p>
-                <input id="amount" type="number" min="1" max="5000000">
-
-                <p>Interest Rate: %</p>
-                <input id="interest_rate" min="0" max="100" value="" step=".1">
-
-                <p>Months to Pay: </p>
-                <input id="months" type="number" min="1" max="300" value="" step="1">
-
-                <div class="btn">
-                    <button id="btn" onclick="computeLoan()">Calculate</button>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <label for="amount">Amount:</label>
+                            <input type="text" class="form-control" placeholder="Amount" aria-label="amount" id="amount"
+                                disabled>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="interest_rate">Interest Rate</label>
+                            <input type="number" min="9" max="20" value="9" step=".1" class="form-control"
+                                placeholder="Interest Rate %" id="interest_rate">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label for="months">Months</label>
+                            <input type="number" min="3" max="24" value="3" step="1" class="form-control" id="months">
+                        </div>
+                        <div class="col-6 mb-3">
+                            <label>&nbsp;</label>
+                            <button id="btn" onclick="computeLoan()" class="btn btn-primary w-100">Calculate</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <table class="table" id="emiChart">
+                        <tr>
+                            <td scope="row" class="text-center text-bold">Calculate To See The Result</td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
