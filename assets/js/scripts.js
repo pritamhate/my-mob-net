@@ -1,6 +1,7 @@
 const mCards = document.getElementById('mobileCards');
 const cartList = document.getElementById('cartItem');
 const totalAmt = document.getElementById('totalAmount');
+const totalAmountForEmi = document.getElementById('amount');
 async function prit() {
     console.log("indide the prit");
 
@@ -33,7 +34,10 @@ d.then(data => {
                         </div>
                     </div>
                     <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="javascript:void(0)" onclick="addtocart(this)" id="addToCart">Add to cart</a>
+                        <div class="d-flex">
+                        <a class="btn btn-outline-dark mt-auto" href="javascript:void(0)" onclick="addtocart(this)" id="addToCart">Add to cart</a>
+                        <a class="btn btn-outline-dark mt-auto ms-auto" href="javascript:void(0)" onclick="calculateEmi(this)" id="calculateEmi"  data-bs-toggle="offcanvas" data-bs-target="#emiPanel"
+                        aria-controls="emiPanel">Calculate EMI</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +51,10 @@ let cartCount = document.getElementById('cartCount');
 cartCount.innerText = countOfCart;
 let cartItems = [];
 
+let cartItem;
+
 let ta = 0;
+totalAmt.innerText = `$${ta}`;
 
 //add items to cart
 function addtocart(e) {
@@ -57,7 +64,7 @@ function addtocart(e) {
     let productName = childNodes[5].childNodes[1].childNodes[1].innerText;
     let productPrice = childNodes[5].childNodes[1].childNodes[9].innerText;
 
-    let cartItem = {
+    cartItem = {
         pname: productName,
         pprice: Number(productPrice.replace("$","")),
     };
@@ -73,7 +80,7 @@ function addtocart(e) {
         //total amount
         ta = ta + item.pprice;
 
-        totalAmt.innerText = ta;
+        totalAmt.innerText = `$${ta}`;
 
         cartList.innerHTML+= `
             <li class="list-group-item">
@@ -86,3 +93,34 @@ function addtocart(e) {
 }
 
 //remove item from cart
+
+//calculatr emi
+
+function calculateEmi(a) {
+    let emiParentNode = a.parentNode.parentNode.parentNode;
+    let emiChildNodes = emiParentNode.childNodes;
+
+    
+
+    let emiProductName = emiChildNodes[5].childNodes[1].childNodes[1].innerText;
+    let emiProductPrice = emiChildNodes[5].childNodes[1].childNodes[9].innerText;
+    let epp = Number(emiProductPrice.replace("$",""));
+
+    console.log(emiProductName, epp);
+
+    totalAmountForEmi.value = epp;
+}
+
+function computeLoan() {
+    //const calculete_btn = document.querySelector("#btn");
+    const amount = document.querySelector("#amount").value;
+    const interest_rate = document.querySelector("#interest_rate").value;
+    const months = document.querySelector("#months").value;
+    const interest = (amount * (interest_rate * 0.01)) / months;
+    const totalWithInterest = (Number(amount) + Number(interest));
+    let payment = (amount / months + interest).toFixed(2);
+    payment = payment.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    document.querySelector(
+      "#payment"
+    ).innerHTML = `Monthly Payment = $${Math.round(payment)} with the interest rate of ${interest_rate} the additinal amount to be paid is $${Math.round(interest)} & the total amount is ${Math.round(totalWithInterest)}`;
+  }

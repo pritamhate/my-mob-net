@@ -30,8 +30,8 @@
                     <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-dark" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions">
+                    <button class="btn btn-outline-dark" data-bs-toggle="offcanvas" data-bs-target="#cartPanel"
+                        aria-controls="cartPanel">
                         <i class="bi-cart-fill me-1"></i>
                         Cart
                         <span class="badge bg-dark text-white ms-1 rounded-pill" id="cartCount">0</span>
@@ -88,10 +88,10 @@
         </div>
     </footer>
 
-    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
-        aria-labelledby="offcanvasWithBothOptionsLabel">
+    <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="cartPanel"
+        aria-labelledby="cartPanelLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="offcanvasWithBothOptionsLabel">My Cart</h5>
+            <h5 class="offcanvas-title" id="cartPanelLabel">My Cart</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body">
@@ -100,7 +100,32 @@
             </ul>
             <h5 id="totalAmount"></h5>
         </div>
+    </div>
 
+    <div class="offcanvas offcanvas-bottom" data-bs-scroll="true" tabindex="-1" id="emiPanel"
+        aria-labelledby="emiPanelLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="emiPanelLabel">Calculate EMI</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <h2 id="payment"></h2>
+            <div class="input">
+
+                <p>Loan Amount: $</p>
+                <input id="amount" type="number" min="1" max="5000000">
+
+                <p>Interest Rate: %</p>
+                <input id="interest_rate" min="0" max="100" value="" step=".1">
+
+                <p>Months to Pay: </p>
+                <input id="months" type="number" min="1" max="300" value="" step="1">
+
+                <div class="btn">
+                    <button id="btn" onclick="computeLoan()">Calculate</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap core JS-->
