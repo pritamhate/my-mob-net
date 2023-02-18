@@ -11290,3 +11290,7 @@ textarea.form-control-lg {
 .offcanvas-bottom {
   height: 40vh;
 }
+
+thead, tbody, tfoot, tr, td, th {
+  vertical-align: middle;
+}
