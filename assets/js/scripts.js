@@ -86,13 +86,16 @@ function addtocart(e) {
             <li class="list-group-item">
                 <span>${item.pname}</span>
                 <b>$${item.pprice}</b>
-                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-danger" onclick="removeItem(this)">Delete</button>
             </li>
         `;
     }
 }
 
 //remove item from cart
+function removeItem(x) {
+    alert(x)
+}
 
 //calculatr emi
 
